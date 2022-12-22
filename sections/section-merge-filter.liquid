@@ -1,0 +1,34 @@
+<script>
+  var colorFilters = [];
+  {% for block in section.blocks %}
+    colorFilters.push({ 'merged_filter': '{{ block.settings.merged_filter }}','original_filters': '{{ block.settings.original_filters }}' });
+  {% endfor %}
+</script>  
+
+{% schema %}
+{
+  "name": "Color Filter Merge",
+  "max_blocks": 15,
+  "settings": [
+    
+  ],
+  "blocks": [
+    {
+      "name": "Color Filters",
+      "type": "color_filters",
+      "settings": [
+        {
+          "type": "text",
+          "id": "merged_filter",
+          "label": "Merged Filter"
+        },
+        {
+          "type": "text",
+          "id": "original_filters",
+          "label": "Original Filters (Comma sapareted)"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

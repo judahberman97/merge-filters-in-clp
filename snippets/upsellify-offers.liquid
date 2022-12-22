@@ -1,0 +1,87 @@
+<script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+<script type="text/javascript" src="https://upsellify.pro/upsellifysdk/frontsdk/scripts/slick/slick.min.js"></script>
+
+
+<script type="text/javascript">
+  {% assign upfy_page_template = '' %}
+  {% assign upfy_cart_subtotal_text = 'Saved amount : ' %}
+  {% assign upfy_cart_total_text = 'Total amount : ' %}
+  window.upfy_appsettings = {
+    shop_slug: "{{shop.permanent_domain | remove: '.myshopify.com' }}",
+    shop_id: "{{shop.id }}",
+    money_format: "{{shop.money_format | replace: '"', "'"}}",
+    shop_cart_subtotal_text: "{{upfy_cart_subtotal_text}}",
+    shop_cart_total_text: "{{upfy_cart_total_text}}",
+    customer: null,
+    cart: null,
+  }
+  
+
+  {% if customer %}
+  window.upfy_appsettings.customer = {
+    id: {{customer.id}},
+    tags: {{customer.tags | json}},
+  };
+  {% endif %}
+
+  {% assign upfy_page_template = template | replace: '.', ' ' | truncatewords: 1, "" %}
+  {% if upfy_page_template contains 'collection' %}
+  {% unless collection.id == blank %}
+    {% assign upfy_page_template = 'collection' %}
+    window.upfy_appsettings.collection = {
+      id: {{collection.id}}
+    }
+  {% endunless %}
+  {% endif %}
+
+  {% if upfy_page_template contains 'product' %}
+  {% unless product.id == blank %}
+    {% assign upfy_appsettings = 'product' %}
+    window.upfy_appsettings.product = {
+      id: {{product.id}},
+      price: {{product.price}},
+    };
+    window.upfy_appsettings.product_collections = []
+    {% for c in product.collections %}
+    window.upfy_appsettings.product_collections.push({{c.id}})
+    {% endfor %}
+
+    window.upfy_appsettings.product = {{product | json}};
+  {% endunless %}
+  {% endif %}
+
+  {% if upfy_page_template contains 'cart' %}
+  {% assign upfy_page_template = 'cart' %}
+  {% endif %}
+
+  {% if cart %}
+  	window.upfy_appsettings.cart = {{cart | json}}
+    delete window.upfy_appsettings.cart.note
+    window.upfy_appsettings.cart_collections = {}
+    {% for item in cart.items %}
+    	window.upfy_appsettings.cart_collections["v{{item.variant_id}}"] = []
+        {% for c in item.product.collections %}
+        window.upfy_appsettings.cart_collections["v{{item.variant_id}}"].push({{c.id}})
+        {% endfor %}
+    {% endfor %}
+	if (typeof window.upfy_appsettings.cart.items == "object") {
+    	for (var i=0; i<window.upfy_appsettings.cart.items.length; i++) {
+        	["sku", "grams", "vendor", "url", "image", "handle", "requires_shipping", "product_type", "product_description"].map(function(a) {
+          		delete window.upfy_appsettings.cart.items[i][a]
+        	})
+    	}
+    }
+  {% endif %}
+
+  window.upfy_appsettings.page_template = "{{upfy_page_template}}"
+  if (typeof window.location == "object" && typeof window.location.pathname == "string") {
+    if (window.location.pathname.indexOf('/checkouts/') > -1) {
+      window.upfy_appsettings.page_template = "checkout"
+    }
+  }
+</script>
+{{ 'upsellify-offers.css' | asset_url | stylesheet_tag }}
+
+{% render 'upsellify-offers-template' %}
+

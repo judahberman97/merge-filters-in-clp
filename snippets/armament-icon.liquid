@@ -1,0 +1,297 @@
+{% comment %}
+    Renders an SVG icon.
+
+    Accepts:
+    - icon {String} Which icon you'd like to render.
+    - classes: {String} custom classes to apply to the icon.
+    - width {Int} Optional specify a width.
+    - height {Int} Optional specify a height.
+    - attributes: {String} custom attributes for the svg element
+    - has_link: {Boolean} use this if we want to add a link around the icon
+    - link_href: {Object} the link href
+    - link_label: {String} the link's aria-label for accessiblity purposes
+    - link_classes: {String} classes to add to the link
+    - no_animation: {Boolean} Set to true to disable hover animations
+
+    Usage:
+    {% render 'armament-icon' with icon: 'arrow-left' %}
+
+    Specify size and any margins:
+    {% render 'armament-icon' with icon: 'cancel', width: 10, height: 10, margin: '0 0 0 10px' %}
+
+    Disable hover animation:
+    {% render 'armament-icon' with icon: 'play', no_animation: true %}
+{% endcomment %}
+
+{%- liquid
+  if width == blank
+    assign width = 16
+  endif
+
+  if height == blank
+    assign height = 16
+  endif
+
+  unless no_animation
+    assign icon_hover_classes = 'icon-hover-classes'
+  endunless
+-%}
+
+{% if margin != blank %}
+<div style="margin: {{ margin }}">
+{% endif %}
+
+{%- case icon %}
+  {% when 'none' %}
+    <span></span>
+  {% when 'arrow-left' %}
+    {% if has_link %}
+      <a href="{{ link_href }}" aria-label="{{ link_label }}"{% if link_classes %}class="{{ link_classes }}"{% endif %} data-aid="icon-arrow-left-link">
+    {% endif %}
+        <svg data-aid="icon-arrow-left" width="{{ width }}" height="{{ height }}" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" class="{% unless no_animation %}no-touch-hover:group-hover:-translate-x-1 transition-transform duration-200{% endunless %}{% if classes %} {{ classes }}{% endif %}"{% if attributes %} {{ attributes }}{% endif %}>
+          <path fill-rule="evenodd" clip-rule="evenodd" d="M4.66868 7.99998L11.4525 1.21606L10.3919 0.1554L2.54749 7.99987L2.55242 8.0048L2.55231 8.00491L10.3919 15.8446L11.4526 14.7839L4.66868 7.99998Z" fill="currentColor"/>
+        </svg>
+    {% if has_link %}
+      </a>
+    {% endif %}
+  {% when 'arrow-right' %}
+    {% if has_link %}
+      <a href="{{ link_href }}" aria-label="{{ link_label }}"{% if link_classes %}class="{{ link_classes }}"{% endif %} data-aid="icon-arrow-right-link">
+    {% endif %}
+        <svg data-aid="icon-arrow-right" width="{{ width }}" height="{{ height }}" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" class="{% unless no_animation %}no-touch-hover:group-hover:translate-x-1 transition-transform duration-200{% endunless %}{% if classes %} {{ classes }}{% endif %}"{% if attributes %} {{ attributes }}{% endif %}>
+          <path fill-rule="evenodd" clip-rule="evenodd" d="M11.3313 8.00002L4.54746 14.7839L5.60811 15.8446L13.4525 8.00013L13.4476 7.9952L13.4477 7.99509L5.60807 0.155396L4.54741 1.21606L11.3313 8.00002Z" fill="currentColor"/>
+        </svg>
+    {% if has_link %}
+      </a>
+    {% endif %}
+  {% when 'bag' %}
+    {% if has_link %}
+      <a href="{{ link_href }}" aria-label="{{ link_label }}"{% if link_classes %}class="{{ link_classes }}"{% endif %}>
+    {% endif %}
+      <svg data-aid="icon-bag" width="{{ width }}" height="{{ height }}" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" class="{{ icon_hover_classes }}{% if classes %} {{ classes }}{% endif %}"{% if attributes %} {{ attributes }}{% endif %}>
+        <path fill-rule="evenodd" clip-rule="evenodd" d="M14.3404 5H15.5V6.5V14.5V16H14H2H0.5V14.5V6.5V5H1.6756C2.35583 2.13287 4.93284 0 8.00801 0C11.0832 0 13.6602 2.13287 14.3404 5ZM3.23103 5C3.87091 2.97109 5.76766 1.5 8.00801 1.5C10.2484 1.5 12.1451 2.97109 12.785 5H3.23103ZM2 6.5H14V14.5H2V6.5Z" fill="currentColor"/>
+      </svg>
+    {% if has_link %}
+      </a>
+    {% endif %}
+  {% when 'sale' %}
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+      <g clip-path="url(#clip0_4561_29430)">
+        <path fill="currentColor" fill-rule="evenodd" clip-rule="evenodd" d="M15.9935 -0.000779591L9.0446 -0.000779591L7.88502 1.1588L1.17867 7.86516L0.019089 9.02473L1.17867 10.1843L5.81698 14.8226L6.97656 15.9822L8.13614 14.8226L14.8425 8.11627L16.0021 6.95669L15.9974 6.95198L15.9974 0.0045916L15.9935 0.0045916L15.9935 -0.000779591ZM14.3575 1.63911V6.28207L13.6829 6.95666L13.6829 6.95669L6.97656 13.663L2.33825 9.02473L8.72113 2.64185L8.7211 2.64181L9.7238 1.63911L14.3575 1.63911ZM10.7839 4.05774L11.9435 5.21732L13.1031 4.05774L11.9435 2.89816L10.7839 4.05774Z" fill="black"/>
+      </g>
+      <defs>
+        <clipPath id="clip0_4561_29430">
+          <rect width="16" height="16" fill="white"/>
+        </clipPath>
+      </defs>
+    </svg>
+  {% when 'filter' %}
+    {% if has_link %}
+      <a href="{{ link_href }}" aria-label="{{ link_label }}"{% if link_classes %}class="{{ link_classes }}"{% endif %}>
+    {% endif %}
+      <svg data-aid="icon-filter" width="{{ width }}" height="{{ height }}" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" class="{{ icon_hover_classes }}{% if classes %} {{ classes }}{% endif %}"{% if attributes %} {{ attributes }}{% endif %}>
+        <mask id="path-1-inside-1_3982_28331" class="fill-current text-page">
+          <path fill-rule="evenodd" clip-rule="evenodd" stroke="var(--colors-body-text)" stroke-width="0.5" d="M10.2942 7.62274V15.75H5.29419V7.62263L0 1H15.5885L10.2942 7.62274Z"/>
+        </mask>
+        <path d="M10.2942 7.62274L9.12255 6.68612L8.79419 7.09687V7.62274H10.2942ZM10.2942 15.75V17.25H11.7942V15.75H10.2942ZM5.29419 15.75H3.79419V17.25H5.29419V15.75ZM5.29419 7.62263H6.79419V7.09677L6.46583 6.68602L5.29419 7.62263ZM0 1V-0.5H-3.1195L-1.17164 1.93662L0 1ZM15.5885 1L16.7601 1.93662L18.708 -0.5H15.5885V1ZM8.79419 7.62274V15.75H11.7942V7.62274H8.79419ZM10.2942 14.25H5.29419V17.25H10.2942V14.25ZM6.79419 15.75V7.62263H3.79419V15.75H6.79419ZM6.46583 6.68602L1.17164 0.0633802L-1.17164 1.93662L4.12255 8.55925L6.46583 6.68602ZM0 2.5H15.5885V-0.5H0V2.5ZM14.4168 0.0633802L9.12255 6.68612L11.4658 8.55936L16.7601 1.93662L14.4168 0.0633802Z" fill="currentColor" mask="url(#path-1-inside-1_3982_28331)"/>
+      </svg>
+    {% if has_link %}
+      </a>
+    {% endif %}
+  {% when 'search' %}
+    {% if has_link %}
+      <a href="{{ link_href }}" aria-label="{{ link_label }}"{% if link_classes %}class="{{ link_classes }}"{% endif %}>
+    {% endif %}
+      <svg data-aid="icon-search" width="{{ width }}" height="{{ height }}" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" class="no-touch-hover:group-hover:[transform:scale(1.125)rotate(90deg)] transition-transform duration-200{% if classes %} {{ classes }}{% endif %}"{% if attributes %} {{ attributes }}{% endif %}>
+        <path fill-rule="evenodd" clip-rule="evenodd" d="M12.0345 6.39395C12.0345 9.11133 9.83166 11.3142 7.11429 11.3142C4.39691 11.3142 2.19405 9.11133 2.19405 6.39395C2.19405 3.67658 4.39691 1.47371 7.11429 1.47371C9.83166 1.47371 12.0345 3.67658 12.0345 6.39395ZM10.2669 11.9579C9.33651 12.4862 8.26063 12.7879 7.11429 12.7879C3.58301 12.7879 0.720337 9.92523 0.720337 6.39395C0.720337 2.86267 3.58301 0 7.11429 0C10.6456 0 13.5082 2.86267 13.5082 6.39395C13.5082 8.23338 12.7315 9.89139 11.4881 11.0579L15.2796 14.8494L14.219 15.91L10.2669 11.9579Z" fill="currentColor"/>
+      </svg>
+    {% if has_link %}
+      </a>
+    {% endif %}
+  {% when 'minus' %}
+    {% if has_link %}
+      <a href="{{ link_href }}" aria-label="{{ link_label }}"{% if link_classes %}class="{{ link_classes }}"{% endif %}>
+    {% endif %}
+      <svg data-aid="icon-minus" width="{{ width }}" height="{{ height }}" fill="none" xmlns="http://www.w3.org/2000/svg" class="{{ icon_hover_classes }}{% if classes %} {{ classes }}{% endif %}"{% if attributes %} {{ attributes }}{% endif %}>
+        <g clip-path="url(#clip0_3976_27975)">
+          <rect y="7.25" width="16" height="1.5" fill="currentColor"/>
+        </g>
+        <defs>
+          <clipPath id="clip0_3976_27975">
+            <rect width="16" height="16" fill="none"/>
+          </clipPath>
+        </defs>
+      </svg>
+    {% if has_link %}
+      </a>
+    {% endif %}
+  {% when 'plus' %}
+    {% if has_link %}
+      <a href="{{ link_href }}" aria-label="{{ link_label }}"{% if link_classes %}class="{{ link_classes }}"{% endif %}>
+    {% endif %}
+      <svg data-aid="icon-plus" width="{{ width }}" height="{{ height }}" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" class="{{ icon_hover_classes }}{% if classes %} {{ classes }}{% endif %}"{% if attributes %} {{ attributes }}{% endif %}>
+        <rect y="7.25" width="16" height="1.5" fill="currentColor"/>
+        <rect x="7.25" y="16" width="16" height="1.5" transform="rotate(-90 7.25 16)" fill="currentColor"/>
+      </svg>
+    {% if has_link %}
+      </a>
+    {% endif %}
+  {% when 'play' %}
+    {% if has_link %}
+      <a href="{{ link_href }}" aria-label="{{ link_label }}"{% if link_classes %}class="{{ link_classes }}"{% endif %}>
+    {% endif %}
+    {% if no_animation %}
+      <svg data-aid="icon-play" width="62" height="60" viewBox="0 0 62 60" fill="none" xmlns="http://www.w3.org/2000/svg" class="{% if classes %} {{ classes }}{% endif %}"{% if attributes %} {{ attributes }}{% endif %}>
+        <g id="PLAY HOVER">
+          <circle id="Ellipse 16" cx="30.76" cy="30" r="28.5" fill="var(--colors-background)"/>
+          <path id="Triangle" d="M40.76 30L25.76 38.6603L25.76 21.3397L40.76 30Z" stroke="currentColor" stroke-width="1.3"/>
+        </g>
+      </svg>
+    {% else %}
+      <svg data-aid="icon-play" width="62" height="60" viewBox="0 0 62 60" fill="none" xmlns="http://www.w3.org/2000/svg" class="overflow-visble group no-touch-hover:hover:[transform:scale(1.125)] transition-transform duration-200{% if classes %} {{ classes }}{% endif %}"{% if attributes %} {{ attributes }}{% endif %}>
+        <g id="PLAY HOVER">
+          <circle cx="30.76" cy="30" r="29" fill="none" stroke="currentColor" class="opacity-0 group-hover:opacity-100 transition-opacity duration-500"/>
+          <circle id="Ellipse 16" cx="30.76" cy="30" r="28.5" fill="var(--colors-background)"/>
+          <path id="Triangle" d="M40.76 30L25.76 38.6603L25.76 21.3397L40.76 30Z" stroke="currentColor" stroke-width="1.3"/>
+        </g>
+      </svg>
+    {% endif %}
+    {% if has_link %}
+      </a>
+    {% endif %}
+  {% when '3d-model' %}
+    {% if has_link %}
+      <a href="{{ link_href }}" aria-label="{{ link_label }}"{% if link_classes %}class="{{ link_classes }}"{% endif %}>
+    {% endif %}
+      {% if no_animation %}
+        <svg data-aid="icon-3d-model" width="61" height="60" viewBox="0 0 61 60" fill="none" xmlns="http://www.w3.org/2000/svg" class="{% if classes %} {{ classes }}{% endif %}"{% if attributes %} {{ attributes }}{% endif %}>
+          <circle cx="30.6931" cy="30" r="28.5" fill="var(--colors-background)" fill-opacity="0.9"/>
+          <path d="M30.6931 19.09L40.0431 24.6642V35.3357L30.6931 40.9098L21.3431 35.3357V24.6642L30.6931 19.09Z" stroke="currentColor" stroke-width="1.3"/>
+          <path d="M30.5959 30.2053L40.693 24.2618V35.4058L30.5959 41.3492V30.2053Z" fill="currentColor"/>
+        </svg>
+      {% else %}
+        <svg data-aid="icon-3d-model" width="61" height="60" viewBox="0 0 61 60" fill="none" xmlns="http://www.w3.org/2000/svg" class="overflow-visble group hover:[transform:scale(1.125)] transition-transform duration-200{% if classes %} {{ classes }}{% endif %}"{% if attributes %} {{ attributes }}{% endif %}>
+          <circle cx="30.76" cy="30" r="29" fill="none" stroke="currentColor" class="opacity-0 group-hover:opacity-100 transition-opacity duration-500"/>
+          <circle cx="30.6931" cy="30" r="28.5" fill="var(--colors-background)" fill-opacity="0.9"/>
+          <path d="M30.6931 19.09L40.0431 24.6642V35.3357L30.6931 40.9098L21.3431 35.3357V24.6642L30.6931 19.09Z" stroke="currentColor" stroke-width="1.3"/>
+          <path d="M30.5959 30.2053L40.693 24.2618V35.4058L30.5959 41.3492V30.2053Z" fill="currentColor"/>
+        </svg>
+      {% endif %}
+    {% if has_link %}
+      </a>
+    {% endif %}
+  {% when 'sort' %}
+    {% if has_link %}
+      <a href="{{ link_href }}" aria-label="{{ link_label }}"{% if link_classes %}class="{{ link_classes }}"{% endif %}>
+    {% endif %}
+      <svg data-aid="icon-sort" width="{{ width }}" height="{{ height }}" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" class="{{ icon_hover_classes }}{% if classes %} {{ classes }}{% endif %}"{% if attributes %} {{ attributes }}{% endif %}>
+        <rect y="3" width="16" height="1.5" fill="currentColor"/>
+        <rect y="7" width="12" height="1.5" fill="currentColor"/>
+        <rect y="11" width="9" height="1.5" fill="currentColor"/>
+      </svg>
+    {% if has_link %}
+      </a>
+    {% endif %}
+  {% when 'cancel' %}
+    {% if has_link %}
+      <a href="{{ link_href }}" aria-label="{{ link_label }}"{% if link_classes %}class="{{ link_classes }}"{% endif %}>
+    {% endif %}
+      <svg data-aid="icon-cancel" width="{{ width }}" height="{{ height }}" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" class="{{ icon_hover_classes }}{% if classes %} {{ classes }}{% endif %}"{% if attributes %} {{ attributes }}{% endif %}>
+        <rect width="20.6878" height="1.5" transform="matrix(0.70711 -0.707104 0.70711 0.707104 0.155396 14.7839)" fill="currentColor"/>
+        <rect width="20.6878" height="1.5" transform="matrix(-0.70711 -0.707104 0.70711 -0.707104 14.7839 15.8445)" fill="currentColor"/>
+      </svg>
+    {% if has_link %}
+      </a>
+    {% endif %}
+  {% when 'star' %}
+    {% if has_link %}
+      <a href="{{ link_href }}" aria-label="{{ link_label }}"{% if link_classes %}class="{{ link_classes }}"{% endif %}>
+    {% endif %}
+      <svg data-aid="icon-star" aria-hidden="true" focusable="false" role="presentation" class="star-active text-body mr-2{% if classes %} {{ classes }}{% endif %}" style="width: 15px; height: 15px;" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 512 512" xml:space="preserve"{% if attributes %} {{ attributes }}{% endif %}>
+        <path fill="currentColor" d="M512,197.816L325.961 185.585 255.898 9.569 185.835 185.585 0 197.816 142.534 318.842 95.762 502.431 255.898 401.21 416.035 502.431 369.263 318.842z"></path>
+      </svg>
+    {% if has_link %}
+      </a>
+    {% endif %}
+  {% when 'account' %}
+    {% if has_link %}
+      <a href="{{ link_href }}" aria-label="{{ link_label }}"{% if link_classes %}class="{{ link_classes }}"{% endif %}>
+    {% endif %}
+      <svg data-aid="account-login" width="{{ width }}" height="{{ height }}" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" class="{{ icon_hover_classes }}{% if classes %} {{ classes }}{% endif %}"{% if attributes %} {{ attributes }}{% endif %}>
+        <rect width="16" height="16" fill="none"/>
+        <path fill-rule="evenodd" clip-rule="evenodd" d="M3.07973 6.39395C3.07973 9.11133 5.2826 11.3142 7.99997 11.3142C10.7173 11.3142 12.9202 9.11133 12.9202 6.39395C12.9202 3.67658 10.7173 1.47371 7.99997 1.47371C5.2826 1.47371 3.07973 3.67658 3.07973 6.39395ZM4.9537 12.017C5.85933 12.5086 6.89704 12.7879 7.99997 12.7879C9.10291 12.7879 10.1406 12.5086 11.0463 12.017L14.9394 15.9101L16 14.8494L12.2878 11.1371C13.5813 9.96713 14.3939 8.27545 14.3939 6.39395C14.3939 2.86267 11.5313 0 7.99997 0C4.46869 0 1.60602 2.86267 1.60602 6.39395C1.60602 8.27546 2.4187 9.96716 3.71219 11.1372L-2.66474e-05 14.8494L1.06063 15.9101L4.9537 12.017Z" fill="currentColor"/>
+      </svg>
+    {% if has_link %}
+      </a>
+    {% endif %}
+  {% when 'mobile-nav' %}
+    {% if has_link %}
+      <a href="{{ link_href }}" aria-label="{{ link_label }}"{% if link_classes %}class="{{ link_classes }}"{% endif %}>
+    {% endif %}
+      <svg viewBox="0 0 100 80" width="{{ width }}" height="{{ height }}" class="{{ icon_hover_classes }}{% if classes %} {{ classes }}{% endif %}"{% if attributes %} {{ attributes }}{% endif %}>
+        <rect width="100" height="10" class="fill-current"></rect>
+        <rect y="30" width="100" height="10" class="fill-current"></rect>
+        <rect y="60" width="100" height="10" class="fill-current"></rect>
+      </svg>
+    {% if has_link %}
+      </a>
+    {% endif %}
+  {% when 'delete' %}
+    {% if has_link %}
+        <a href="{{ link_href }}" aria-label="{{ link_label }}"{% if link_classes %}class="{{ link_classes }}"{% endif %}>
+    {% endif %}
+    <svg data-aid="icon-delete" width="{{ width }}" height="{{ height }}" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" class="{{ icon_hover_classes }}{% if classes %} {{ classes }}{% endif %}"{% if attributes %} {{ attributes }}{% endif %}>
+      <g clip-path="url(#clip0_3991_28478)">
+        <path d="M3.41675 5.07483H12.5834V15.25H3.41675V5.07483Z" stroke="currentColor" stroke-width="1.5"/>
+        <path d="M4.48328 4.88696H11.5166V0.808283H4.48328V4.88696Z" stroke="currentColor" stroke-width="1.5"/>
+        <rect x="0.533325" y="4.30359" width="14.9333" height="1.5" fill="currentColor"/>
+        <rect x="8.75" y="5.39148" width="9.51029" height="1.5" transform="rotate(90 8.75 5.39148)" fill="currentColor"/>
+      </g>
+      <defs>
+        <clipPath id="clip0_3991_28478">
+          <rect width="{{ width }}" height="{{ height }}" fill="none"/>
+        </clipPath>
+      </defs>
+    </svg>
+    {% if has_link %}
+      </a>
+    {% endif %}
+  {% when 'tick' %}
+    {% if has_link %}
+        <a href="{{ link_href }}" aria-label="{{ link_label }}"{% if link_classes %}class="{{ link_classes }}"{% endif %}>
+    {% endif %}
+    <svg data-aid="icon-success" width="{{ width }}" height="{{ height }}" viewBox="0 0 17 16" fill="none" xmlns="http://www.w3.org/2000/svg"{% if classes %} class="{{ classes }}"{% endif %}{% if attributes %} {{ attributes }}{% endif %}>
+      <rect x="0.325317" y="9.64111" width="1.5" height="7.55899" transform="rotate(-50 0.325317 9.64111)" fill="currentColor"/>
+      <rect x="6.11548" y="14.5" width="1.5" height="15.6794" transform="rotate(-140 6.11548 14.5)" fill="currentColor"/>
+    </svg>
+    {% if has_link %}
+      </a>
+    {% endif %}
+  {% when 'exclamation' %}
+    {% if has_link %}
+        <a href="{{ link_href }}" aria-label="{{ link_label }}"{% if link_classes %}class="{{ link_classes }}"{% endif %}>
+    {% endif %}
+    <svg data-aid="icon-exclamation" width="{{ width }}" height="{{ height }}" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"{% if classes %} class="{{ classes }}"{% endif %}{% if attributes %} {{ attributes }}{% endif %}>
+      <rect x="7.25" width="1.5" height="12.9309" fill="currentColor"/>
+      <rect x="7.25" y="14.5" width="1.5" height="1.5" fill="currentColor"/>
+    </svg>
+    {% if has_link %}
+      </a>
+    {% endif %}
+  {% when 'facebook' %}
+    <svg data-aid="icon-facebook" fill="currentColor" width="{{ width }}" height="{{ height }}" aria-hidden="true" focusable="false" role="presentation" viewBox="0 0 32 32" class="{{ icon_hover_classes }}{% if classes %} {{ classes }}{% endif %}" {% if attributes %} {{ attributes }}{% endif %}>
+      <path d="M18.56 31.36V17.28h4.48l.64-5.12h-5.12v-3.2c0-1.28.64-2.56 2.56-2.56h2.56V1.28H19.2c-3.84 0-7.04 2.56-7.04 7.04v3.84H7.68v5.12h4.48v14.08h6.4z"></path>
+    </svg>
+  {% when 'twitter' %}
+    <svg data-aid="icon-twitter" fill="currentColor" width="{{ width }}" height="{{ height }}" aria-hidden="true" focusable="false" role="presentation"  viewBox="0 0 24 24" class="{{ icon_hover_classes }}{% if classes %} {{ classes }}{% endif %}" {% if attributes %} {{ attributes }}{% endif %}>
+      <path d="M23.954 4.569c-.885.389-1.83.654-2.825.775 1.014-.611 1.794-1.574 2.163-2.723-.951.555-2.005.959-3.127 1.184-.896-.959-2.173-1.559-3.591-1.559-2.717 0-4.92 2.203-4.92 4.917 0 .39.045.765.127 1.124C7.691 8.094 4.066 6.13 1.64 3.161c-.427.722-.666 1.561-.666 2.475 0 1.71.87 3.213 2.188 4.096-.807-.026-1.566-.248-2.228-.616v.061c0 2.385 1.693 4.374 3.946 4.827-.413.111-.849.171-1.296.171-.314 0-.615-.03-.916-.086.631 1.953 2.445 3.377 4.604 3.417-1.68 1.319-3.809 2.105-6.102 2.105-.39 0-.779-.023-1.17-.067 2.189 1.394 4.768 2.209 7.557 2.209 9.054 0 13.999-7.496 13.999-13.986 0-.209 0-.42-.015-.63.961-.689 1.8-1.56 2.46-2.548l-.047-.02z"/>
+    </svg>
+  {% when 'pinterest' %}
+    <svg data-aid="icon-pinterest" fill="currentColor" width="{{ width }}" height="{{ height }}" aria-hidden="true" focusable="false" role="presentation" viewBox="0 0 32 32" class="{{ icon_hover_classes }}{% if classes %} {{ classes }}{% endif %}" {% if attributes %} {{ attributes }}{% endif %}>
+      <path d="M27.52 9.6c-.64-5.76-6.4-8.32-12.8-7.68-4.48.64-9.6 4.48-9.6 10.24 0 3.2.64 5.76 3.84 6.4 1.28-2.56-.64-3.2-.64-4.48-1.28-7.04 8.32-12.16 13.44-7.04 3.2 3.84 1.28 14.08-4.48 13.44-5.12-1.28 2.56-9.6-1.92-11.52-3.2-1.28-5.12 4.48-3.84 7.04-1.28 4.48-3.2 8.96-1.92 15.36 2.56-1.92 3.84-5.76 4.48-9.6 1.28.64 1.92 1.92 3.84 1.92 6.4-.64 10.24-7.68 9.6-14.08z"></path>
+    </svg>
+{% endcase -%}
+
+{% if margin != blank %}
+</div>
+{% endif %}

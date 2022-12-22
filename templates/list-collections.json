@@ -1,0 +1,1 @@
+{"sections":{"collection-list-header":{"type":"ship-rich-text","blocks":{"heading":{"type":"heading","settings":{"heading":"Collections"}}},"block_order":["heading"],"settings":{}},"main":{"type":"collections-list-main","settings":{}},"newsletter":{"type":"section-newsletter","settings":{"horizontal_alignment":"center"}}},"order":["collection-list-header","main","newsletter"]}

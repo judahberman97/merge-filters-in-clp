@@ -1,0 +1,208 @@
+{% raw  %}
+<script id="nuo-upsy-popup-main" type="text/template">
+<div class="nuo-upsy-nuo-upsy-upellifyPopupMain">
+	<div class="nuo-upsy-upellifyPopup" id="nuo-upsy-main-content" nuo-upsy-offer-id="{{upsy_offer_id}}">
+		<div class="nuo-upsy-upellifyPopupClose" id="nuo-upsy-main-close-btn">
+			<i class="nuo-upsy-upellifyPopupCloseIcon">
+				<svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M8.13101 7.00005L13.1654 1.96565C13.4782 1.65285 13.4782 1.14725 13.1654 0.834454C12.8526 0.521654 12.347 0.521654 12.0342 0.834454L6.99981 5.86885L1.96541 0.834454C1.65261 0.521654 1.14701 0.521654 0.834209 0.834454C0.521409 1.14725 0.521409 1.65285 0.834209 1.96565L5.86861 7.00005L0.834209 12.0345C0.521409 12.3473 0.521409 12.8529 0.834209 13.1657C0.990209 13.3217 1.19501 13.4001 1.39981 13.4001C1.60461 13.4001 1.80941 13.3217 1.96541 13.1657L6.99981 8.13125L12.0342 13.1657C12.1902 13.3217 12.395 13.4001 12.5998 13.4001C12.8046 13.4001 13.0094 13.3217 13.1654 13.1657C13.4782 12.8529 13.4782 12.3473 13.1654 12.0345L8.13101 7.00005Z" fill="currentColor"></path></svg>
+			</i>
+		</div>
+		<div class="nuo-upsy-upellifyPopupHeader">
+			<h2 id="nuo-upsy-main-title">{{upsy_offer_title}}</h2>
+               <h3 id="nuo-upsy-main-description">{{upsy_description}}</h3>
+		</div>
+		<div class="nuo-upsy-upellifyPopupBody">
+			<div class="sectionHeight">
+				{{upsy_main_product}}
+				<div class="nuo-upsy-upellifyOtherProducts">
+					<ul>
+						{{upsy_offer_product}}
+					</ul>
+				</div>
+			</div>
+		</div>
+		<div class="nuo-upsy-upellifyPopupFooter">
+               {{upsy_other_information}}
+               {{upsy_nothanks_button}}
+               {{upsy_continue_button}}
+               {{upsy_checkout_button}}
+        </div>
+	</div>
+</div>
+
+</script>
+<script id="nuo-upsy-popup-main-product-row" type="text/template">
+    <div class="nuo-upsy-upellifyMainProduct">
+        <div class="nuo-upsy-imgBox">
+            <img src="{{upsy_product_img_src}}">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50" width="100%" height="100%" class="nuo-upsy-animated-checkmark--finished"><circle class="checkmark__circle" cx="26" cy="26" r="25" fill="none"></circle><path class="checkmark__check nuo-upsy-origin-center" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8"></path></svg>
+        </div>
+        <div class="namePriceWrap">
+            <div class="nuo-upsy-productName">
+                <a href="{{upsy_product_link}}" target="_blank" class="upsell-product-link">
+                    {{upsy_product_title}}
+                </a>
+            </div>
+            <div class="nuo-upsy-productPrice">
+                <span class="nuo-upsy-compare">{{upsy_product_original_price}}</span>
+           </div>
+        </div>
+    </div>
+</script>
+
+<script id="nuo-upsy-popup-upsell-product-row" type="text/template">
+  <li class="nuo-upsy-upellifyItem" id="nuo-upsy-product-{{upsy_product_id}}">
+        <div class="nuo-upsy-upellifyItemInner" id="nuo-upsy-upellifyItemInner_{{upsy_product_id}}">
+            <div class="nuo-upsy-prductDesc">
+                <div class="nuo-upsy-imgBox">
+                    <div class="nuo-upsy-imgBoxInner">
+                        <img src="{{upsy_product_img_src}}">
+                    </div>
+                </div>
+                <div class="nuo-upsy-infoBox">
+                    <div class="namePriceWrap">
+                        <div class="nuo-upsy-productName">
+                            <a href="{{upsy_product_link}}" target="_blank" class="upsell-product-link">
+                                {{upsy_product_title}}
+                            </a>
+                        </div>
+                        <div class="nuo-upsy-productPrice">
+                            <span class="nuo-upsy-compare">{{upsy_product_original_price}}</span>
+                            <span class="nuo-upsy-original">{{upsy_product_price}}</span>
+                        </div>
+                    </div>
+                    {{upsy_product_variants}}
+                    
+                </div>
+            </div>
+            <div class="nuo-upsy-prductAction">
+                <div class="nuo-upsy-atcButton">
+                    {{upsy_product_other_buttons}}
+                    
+                </div>
+            </div>
+        </div>
+    </li>
+</script>
+<script id="nuo-upsy-bundle-maincontainer" type="text/template">
+<div class="nuo-upsy-upsellifyFbtContainer nuo-upsy-bundle-list-item_{{upfy_total products}}" id="nuo-upsy-product-{{upsy_offer_id}}">
+  <div class="nuo-upsy-fbtRow text-center">
+    <div class="nuo-upsy-fbtHeading text-center">
+    <h2>{{upsy_offer_title}}</h2>
+    </div>
+    <div class="nuo-upsy-fbtImageRow">
+      <div class="nuo-upsy-fbtImagePlusWrap">
+          {{upsy_bundle_product_image}}
+      </div>
+    
+      <div class="nuo-upsy-fbtATCBox">
+        <div class="nuo-upsy-fbtTotalPrice">
+        	<span class="nuo-upsy-fbtTotalPricetext">{{upsy_bundle_pricetext}}</span>
+          <span>{{upsy_bundle_price}}</span>
+        </div>
+        {{upsy_bundle_buttons}}
+      </div>
+    </div>
+    <div class="nuo-upsy-fbtDescRow">
+    	{{upsy_bundle_product_desc}}
+    </div>
+    {{upsy_other_information}}
+  </div>
+</div>
+</script>     
+
+<script id="nuo-upsy-bundlesdesc-row" type="text/template">
+<div class="nuo-upsy-fbtDescBox">
+	<input id="fbtCheckBox" class="nuo-upsy-fbt-checkbox" upfy_pid="{{upsy_product_id}}" type="checkbox" name="fbtCheckBox" checked="">
+	<label for="fbtCheckBox"></label>
+  <div class="nuo-upsy-fbtProductDescWrap">
+	<h5 class="nuo-upsy-fbtProductTitle">
+	<a href="{{upsy_product_link}}" target="_blank" class="upsell-product-link">
+		{{upsy_product_title}}
+  </a>
+ 	</h5>
+	{{upsy_product_variants}}
+    <div class="nuo-upsy-fbtProductPrice">
+        <span class="nuo-upsy-product-original-price">{{upsy_product_original_price}}</span>
+      <span class="nuo-upsy-product-price">{{upsy_product_price}}</span>
+    </div>
+</div>
+</div>
+</script>        
+<script id="nuo-upsy-bundlesimage-row" type="text/template">
+<div class="nuo-upsy-fbtImageBox">
+	<div class="nuo-upsy-fbtProductBgImage" style="background-image: url('{{upsy_product_img_src}}');">
+  	</div>
+</div>
+{{upsy_product_plus_sign}}
+</script>  
+<script id="nuo-upsy-recommend-maincontainer" type="text/template">
+<div class="nuo-upsy-product-wrapper" id="nuo-upsy-product-wrapper" nuo-upsy-offer-id="{{upsy_offer_id}}"> 
+    <div class="nuo-upsy-product-heading">
+      <h2>{{upsy_offer_title}}</h2>
+    </div>
+    <div class="nuo-upsy-product-slider">
+    {{upsy_offer_product}}
+    </div>
+    <div class="nuo-upsy-product-slider-toast-container">
+        <div class="nuo-upsy-product-slider-toast nuo-upsy-product-slider-toast--success nuo-upsy-product-slider-toast--disappear" style="animation-duration: 500ms;">
+          <i class="nuo-upsy-product-slider-toast-icon nuo-upsy-product-slider-toast-icon--success">
+            <svg fill="#ffffff" xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 24 24" width="24px" height="24px">    <path d="M12,2C6.477,2,2,6.477,2,12c0,5.523,4.477,10,10,10s10-4.477,10-10C22,6.477,17.523,2,12,2z M17.707,9.707l-7,7 C10.512,16.902,10.256,17,10,17s-0.512-0.098-0.707-0.293l-3-3c-0.391-0.391-0.391-1.023,0-1.414s1.023-0.391,1.414,0L10,14.586 l6.293-6.293c0.391-0.391,1.023-0.391,1.414,0S18.098,9.316,17.707,9.707z"/></svg>
+          </i>
+          <p class="nuo-upsy-product-slider-toast-message">Succesfully added to cart</p>
+          <div class="nuo-upsy-product-slider-toast-dismiss">
+            <button class="nuo-upsy-product-slider-toast-dismiss__button">
+              <i class="nuo-upsy-product-slider-toast-dismiss__icon">
+                <svg fill="#ffffff" xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 24 24" width="24px" height="24px"><path d="M 4.9902344 3.9902344 A 1.0001 1.0001 0 0 0 4.2929688 5.7070312 L 10.585938 12 L 4.2929688 18.292969 A 1.0001 1.0001 0 1 0 5.7070312 19.707031 L 12 13.414062 L 18.292969 19.707031 A 1.0001 1.0001 0 1 0 19.707031 18.292969 L 13.414062 12 L 19.707031 5.7070312 A 1.0001 1.0001 0 0 0 18.980469 3.9902344 A 1.0001 1.0001 0 0 0 18.292969 4.2929688 L 12 10.585938 L 5.7070312 4.2929688 A 1.0001 1.0001 0 0 0 4.9902344 3.9902344 z"/></svg>
+              </i>
+            </button>
+          </div>
+        </div>
+        <div class="nuo-upsy-product-slider-toast--error" style="display:none;"></div>
+      </div>
+  </div>
+</script> 
+<script id="nuo-upsy-recommend-row" type="text/template">
+<div class="nuo-upsy-product-slider-container">
+		{{upfy_badges}}
+        <div class="nuo-upsy-product-slider-card">
+          <div class="nuo-upsy-product-slider-img-wrapper">
+            <img src="{{upsy_product_img_src}}" alt="" loading="lazy">
+          </div>
+          <div class="nuo-upsy-product-slider-content-wrapper">
+            <div class="nuo-upsy-product-slider-product-name">
+              	<h2>
+                <a href="{{upsy_product_link}}" target="_blank" >
+					{{upsy_product_title}}
+  				</a>
+              	
+  				</h2>
+            </div>
+            {{upsy_product_variants}}
+            
+            <button type="button" class="nuo-upsy-product-slider-atc" data-quantity="1" data-product-id="{{upsy_product_id}}">
+              <div class="nuo-upsy-product-slider-atc-loader" id="nuo-upsy-product-slider-atc-loader_{{upsy_product_id}}">
+                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="margin: auto; background: none; display: block; shape-rendering: auto;" width="200px" height="200px" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid">
+                  <circle cx="50" cy="50" fill="none" stroke-fill="#fff" stroke-width="8" r="35" stroke-dasharray="164.93361431346415 56.97787143782138">
+                    <animateTransform attributeName="transform" type="rotate" repeatCount="indefinite" dur="1s" values="0 50 50;360 50 50" keyTimes="0;1"></animateTransform>
+                  </circle>
+                </svg>
+              </div>
+              <div class="nuo-upsy-product-slider-atc-check" id="nuo-upsy-product-slider-atc-check_{{upsy_product_id}}">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                  <path d="M0 0h24v24H0z" fill="none"></path>
+                  <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"></path>
+                </svg>
+              </div>
+              <span class="nuo-upsy-pro-textduct-slider-atc" id="nuo-upsy-pro-textduct-slider-atc_{{upsy_product_id}}"> {{upsy_atc_button_text}} </span>
+              <div class="nuo-upsy-product-slider-pricing" id="nuo-upsy-product-slider-pricing_{{upsy_product_id}}">
+                <span class="nuo-upsy-product-slider-price">{{upsy_product_price}}</span>
+                <span class="nuo-upsy-product-slider-compared-price">{{upsy_product_original_price}}</span>
+              </div>
+            </button>
+          </div>
+        </div>
+      </div>
+
+</script>  
+{% endraw %}

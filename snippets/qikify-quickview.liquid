@@ -1,0 +1,29 @@
+<script type="text/javascript" src="https://sdk.qikify.com/quickview/app-v1.js" defer="defer"></script>
+<script id="qikify-quickview-custom-script">/* #27375 - Reload Qview after more products load - Sebastian T - 28/05/2022  */
+window.addEventListener("load", function () {
+	window.addEventListener("lazyloaded", function () {
+		setTimeout(function () {
+			document.dispatchEvent(new CustomEvent("qview-grid-updated"));
+		}, 100);
+	});
+});
+
+/* Henry - ticket 28286 - disable close when clicking on the background - 06July2022 */
+QikifyQuickView = {
+  clickToClose: false,
+  debug: true,
+};
+
+/* Henry - ticket 29537 - 19Aug2022 */
+document.addEventListener('DOMContentLoaded', () => {
+    if (window.QIKIFY_QUICKVIEW_LOADED) {
+        const el = document.querySelector('[data-block-id="f1b90ce1-6a35-4f29-9f4e-b5ab089a3e49"]');
+      console.log('el', el);
+        if (el) {
+            el.addEventListener('click', () => {
+              console.log('click');
+              setTimeout(() => document.dispatchEvent(new CustomEvent('qview-grid-updated')), 500);
+           });
+        }
+    }
+});</script>

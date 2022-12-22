@@ -1,0 +1,29 @@
+/* We recommend using the 'Custom CSS' global setting to add custom styles so that they will be transferred automatically when the theme is updated */
+
+@media screen and (max-width: 767px){
+  .multi_collection_slider {
+    transition: none !important;
+    transform: none !important;
+    overflow-x: auto;
+}
+  .multi_collection_slider scroll-bar {
+    display: none !important;
+}
+  .multi_collection_slider product-card {
+    margin-bottom: 30px;
+}
+  .multi_collection_slider::-webkit-scrollbar-track{
+	background-color: #988b87;;
+}
+
+.multi_collection_slider::-webkit-scrollbar {
+    height: 4px;
+    background-color: #000;
+    border-radius: 10px;
+}
+
+.multi_collection_slider::-webkit-scrollbar-thumb
+{
+	background-color: #000;	
+}
+}
